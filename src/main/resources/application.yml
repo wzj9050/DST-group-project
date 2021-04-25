@@ -1,0 +1,21 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /hello
+student:
+  name: 山本，给句痛快话
+  age: 投降不投降？
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/student?characterEncoding=UTF-8
+    username: root
+    password: dd976789595
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update #新增数据库链接必备的参数
