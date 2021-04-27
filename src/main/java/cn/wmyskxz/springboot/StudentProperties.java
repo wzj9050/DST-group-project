@@ -10,10 +10,7 @@ package cn.wmyskxz.springboot;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ZijinDesktop2
- * @date 2021/4/23 10:47
- */
+
 @Component
 @ConfigurationProperties(prefix = "student")
 public class StudentProperties {

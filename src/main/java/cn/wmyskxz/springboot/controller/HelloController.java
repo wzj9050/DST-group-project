@@ -5,7 +5,7 @@
  * use it only in accordance with the terms of the license agreement you entered
  * into with Tu.cn
  */
-package cn.wmyskxz.springboot;
+package cn.wmyskxz.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,14 +27,15 @@ public class HelloController {
 
 
 
-    //    @Autowired
-//    private StudentProperties studentProperties;
     @RequestMapping("/hello")
     public String hello(@org.jetbrains.annotations.NotNull Model m) {
-//        return studentProperties.getName() + "test for the hot deployment"+ studentProperties.getAge();
 
-        m.addAttribute( "now", DateFormat.getDateTimeInstance().format(new Date()));
-//这个‘s’是不需要打出来的，会自动显示
+        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
+        String wordsList = "Type what you what you show in the file 'StudenttCotroller.java'";
+        m.addAttribute("words_test", wordsList);
+
+        //这个‘s’是不需要打出来的，会自动显示
         return "hello";
     }
+
 }
