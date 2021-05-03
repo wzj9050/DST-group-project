@@ -29,7 +29,7 @@
             <%--            param.active==? 这里？指的是储存在WEB-INF里的对应data--%>
             <li class="nav-item">
                 <a class='nav-link ${param.active == "helloworld" ? "active" : ""}'
-                   href="<%=request.getContextPath()%>/helloServlet">
+                   href="<%=request.getContextPath()%>/hello">
                     <span data-feather="file-text"></span>
                     Helloworld
                 </a>
