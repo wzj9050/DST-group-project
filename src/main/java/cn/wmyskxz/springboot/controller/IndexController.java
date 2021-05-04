@@ -22,21 +22,15 @@ import java.util.Date;
  * @date 2021/4/22 22:15
  */
 @Controller
-
-public class HelloController {
-
+public class IndexController {
 
 
 
-    @RequestMapping("/hello")
-    public String hello(@org.jetbrains.annotations.NotNull Model m) {
 
-        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
-        String wordsList = "Type what you what you show in the file 'HelloCotroller.java'";
-        m.addAttribute("words_test", wordsList);
+    @RequestMapping("/index")
+    public String Index() {
 
-        //这个‘s’是不需要打出来的，会自动显示
-        return "hello";
+        return "index";
     }
 
 }

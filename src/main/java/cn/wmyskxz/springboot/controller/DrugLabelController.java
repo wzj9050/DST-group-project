@@ -7,8 +7,8 @@
  */
 package cn.wmyskxz.springboot.controller;
 
-import cn.wmyskxz.springboot.bean.Drug;
-import cn.wmyskxz.springboot.dao.DrugDao;
+import cn.wmyskxz.springboot.bean.DrugLabel;
+import cn.wmyskxz.springboot.dao.DrugLabelDao;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,43 +20,42 @@ import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * @author ZijinDesktop2
- * @date 2021/4/22 22:15
+ * @date 2021/5/3 19:53
  */
 @Controller
-public class DrugController {
+public class DrugLabelController {
 
     @Autowired
     private ServletContext servletContext;
     public ServletContext getServletContext() {
         return servletContext;
     }
-//    private DrugDao drugDao = new DrugDao();
-    @RequestMapping("/drugs")
-    public String drugs(@NotNull Model m) {
+//    private DrugLabelDao drugLabelDao = new DrugLabelDao();
 
-        String drugsContent = null;
+    @RequestMapping("/drug_labels")
+    public String drugLabels(@NotNull Model m) {
+
+        List<String> drugLabelsContent = null;
+
         try {
-            drugsContent = Files.readString(Path.of(getServletContext().getRealPath("/WEB-INF/drugs.data")));
+            drugLabelsContent = Files.readAllLines(Path.of(getServletContext().getRealPath("/WEB-INF/drugLabels.data")));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Gson gson = new Gson();
-        Map drugs = gson.fromJson(drugsContent, Map.class);
-        List<Map> drugList = (List<Map>) drugs.get("data");
-        m.addAttribute("drugs", drugList);
-
-//下面两句和上面一句等到爬虫解决就可以放回来了
-//        List<Drug> drugs = drugDao.findAll();
-//        m.addAttribute("drugs", drugs);
-        return "drugs";
+        List<Map> drugLabels = drugLabelsContent.stream().map(x -> gson.fromJson(x, Map.class)).collect(toList());
+        m.addAttribute("drugLabels", drugLabels);
+        return "drug_labels";
     }
-
+//    List<DrugLabel> drugs = drugLabelDao.findAll();
+//        m.addAttribute("drugLabels", drugs);
 
 
     public void setServletContext(ServletContext servletContext) {

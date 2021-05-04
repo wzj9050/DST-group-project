@@ -11,10 +11,21 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class='nav-link ${param.active == "dashboard" ? "active" : ""}'
-                   href="<%=request.getContextPath()%>/">
+                <a class='nav-link ${param.active == "dashboard" ? "active" : ""}' href="<%=request.getContextPath()%>/index">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link ${param.active == "matching_index" ? "active" : ""}' href="<%=request.getContextPath()%>/matchingIndex">
+                    <span data-feather="file"></span>
+                    Matching
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link ${param.active == "samples" ? "active" : ""}' href="<%=request.getContextPath()%>/samples">
+                    <span data-feather="file"></span>
+                    Samples
                 </a>
             </li>
         </ul>
@@ -26,26 +37,22 @@
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
-            <%--            param.active==? 这里？指的是储存在WEB-INF里的对应data--%>
             <li class="nav-item">
-                <a class='nav-link ${param.active == "helloworld" ? "active" : ""}'
-                   href="<%=request.getContextPath()%>/hello">
+                <a class='nav-link ${param.active == "drugs" ? "active" : ""}' href="<%=request.getContextPath()%>/drugs">
                     <span data-feather="file-text"></span>
-                    Helloworld
+                    Drugs
                 </a>
             </li>
             <li class="nav-item">
-                <a class='nav-link ${param.active == "drugs" ? "active" : ""}'
-                   href="<%=request.getContextPath()%>/drugs">
+                <a class='nav-link ${param.active == "drug_labels" ? "active" : ""}' href="<%=request.getContextPath()%>/drug_labels">
                     <span data-feather="file-text"></span>
-                    Drug(test)
+                    Drug Labels
                 </a>
             </li>
             <li class="nav-item">
-                <a class='nav-link ${param.active == "dosing_guideline" ? "active" : ""}'
-                   href="<%=request.getContextPath()%>/dosingGuideline">
+                <a class='nav-link ${param.active == "dosing_Guidelines" ? "active" : ""}' href="<%=request.getContextPath()%>/dosing_guideline">
                     <span data-feather="file-text"></span>
-                    Dosing Guideline(test)
+                    Dosing Guideline
                 </a>
             </li>
         </ul>
