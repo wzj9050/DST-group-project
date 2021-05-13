@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class='nav-link ${param.active == "dosing_Guidelines" ? "active" : ""}' href="<%=request.getContextPath()%>/dosing_guideline">
+                <a class='nav-link ${param.active == "dosing_guidelines" ? "active" : ""}' href="<%=request.getContextPath()%>/dosing_guideline">
                     <span data-feather="file-text"></span>
                     Dosing Guideline
                 </a>

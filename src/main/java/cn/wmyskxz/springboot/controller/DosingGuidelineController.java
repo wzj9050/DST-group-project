@@ -12,6 +12,7 @@ import cn.wmyskxz.springboot.dao.DosingGuidelineDao;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,6 +30,7 @@ import static java.util.stream.Collectors.toList;
  * @author ZijinDesktop2
  * @date 2021/5/4 12:05
  */
+@Controller
 public class DosingGuidelineController {
     @Autowired
     private ServletContext servletContext;
@@ -38,26 +40,26 @@ public class DosingGuidelineController {
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
-//    private DosingGuidelineDao dosingGuidelineDao = new DosingGuidelineDao();
+    private DosingGuidelineDao dosingGuidelineDao = new DosingGuidelineDao();
 
     @RequestMapping("/dosing_guideline")
     public String DosingGuideline(@NotNull Model m) {
 
-        List<String> drugLabelsContent = null;
-        try {
-            drugLabelsContent = Files.readAllLines(Path.of(getServletContext().getRealPath("/WEB-INF/dosingGuideline.data")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Gson gson = new Gson();
-        List<Object> drugLabels = drugLabelsContent.stream().map(x -> {
-            Map map = gson.fromJson(x, Map.class);
-            return map.get("data");
-        }).collect(toList());
-        m.addAttribute("dosing_Guidelines", drugLabels);
+//        List<String> drugLabelsContent = null;
+//        try {
+//            drugLabelsContent = Files.readAllLines(Path.of(getServletContext().getRealPath("/WEB-INF/dosingGuideline.data")));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Gson gson = new Gson();
+//        List<Object> drugLabels = drugLabelsContent.stream().map(x -> {
+//            Map map = gson.fromJson(x, Map.class);
+//            return map.get("data");
+//        }).collect(toList());
+//        m.addAttribute("dosing_Guidelines", drugLabels);
 
-//        List<DosingGuideline> dosingGuidelines = dosingGuidelineDao.findAll();
-//        m.addAttribute("dosingGuidelines", dosingGuidelines);
+        List<DosingGuideline> dosingGuidelines = dosingGuidelineDao.findAll();
+        m.addAttribute("dosing_Guidelines", dosingGuidelines);
 
         return "dosing_guideline";
     }

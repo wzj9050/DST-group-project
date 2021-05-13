@@ -40,11 +40,6 @@
                 font-size: 3.5rem;
             }
         }
-        .divcss5-td-1{width:50px}
-
-        .divcss5-td-2{width:50px}
-
-        .divcss5-td-3{width:300px}
     </style>
 </head>
 <body>
@@ -56,39 +51,46 @@
 <div class="container-fluid">
     <div class="row">
         <jsp:include page="nav.jsp" >
-            <jsp:param name="active" value="dosing_guideline" />
+            <jsp:param name="active" value="matching_index" />
         </jsp:include>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Dosing Guidelines</h2>
+                <h2>Matching Result</h2>
             </div>
-            <div class="table-responsive" style="width:1150px;height:700px;overflow-x:auto;overflow-y:auto">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th class="divcss5-td-2">Name</th>
-                        <th>Recommendation</th>
-                        <th>Drug Id</th>
-                        <th>Source</th>
-                        <th>Summary Markdown</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${dosing_Guidelines}" var="item">
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.name}</td>
-                            <td class="divcss5-td-1">${item.recommendation}</td>
-                            <td width="1000">${item.drugId}</td>
-                            <td>${item.source}</td>
-                            <td class="divcss5-td-3">${item.summaryMarkdown}</td>
-                        </tr>
-                    </c:forEach>
+            <div class="table-responsive">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Sample Info #${sample.id}</h4>
+                    <div>Uploaded at: ${sample.createdAt}</div>
+                    <div>Uploaded by: ${sample.uploadedBy}</div>
 
-                    </tbody>
-                </table>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <h4>Matched Drug Labels</h4>
+                <c:if test="${!matched.isEmpty()}">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Source</th>
+                            <th>Summary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${matched}" var="item" varStatus="loop">
+                            <tr>
+                                <td>${loop.index + 1}</td>
+                                <td>${item.name}</td>
+                                <td>${item.source}</td>
+                                <td>${item.summaryMarkdown}</td>
+                            </tr>
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </c:if>
             </div>
         </main>
     </div>

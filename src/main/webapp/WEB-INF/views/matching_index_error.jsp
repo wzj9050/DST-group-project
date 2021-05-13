@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page isELIgnored="false" %>
 
 <!doctype html>
@@ -40,11 +41,6 @@
                 font-size: 3.5rem;
             }
         }
-        .divcss5-td-1{width:50px}
-
-        .divcss5-td-2{width:50px}
-
-        .divcss5-td-3{width:300px}
     </style>
 </head>
 <body>
@@ -56,39 +52,27 @@
 <div class="container-fluid">
     <div class="row">
         <jsp:include page="nav.jsp" >
-            <jsp:param name="active" value="dosing_guideline" />
+            <jsp:param name="active" value="matching_index" />
         </jsp:include>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Dosing Guidelines</h2>
+                <h2>Matching</h2>
             </div>
-            <div class="table-responsive" style="width:1150px;height:700px;overflow-x:auto;overflow-y:auto">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th class="divcss5-td-2">Name</th>
-                        <th>Recommendation</th>
-                        <th>Drug Id</th>
-                        <th>Source</th>
-                        <th>Summary Markdown</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${dosing_Guidelines}" var="item">
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.name}</td>
-                            <td class="divcss5-td-1">${item.recommendation}</td>
-                            <td width="1000">${item.drugId}</td>
-                            <td>${item.source}</td>
-                            <td class="divcss5-td-3">${item.summaryMarkdown}</td>
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
+            <div class="table-responsive">
+                <c:if test="${validateError != null}">
+                    <div><c:out value="${validateError}"></c:out></div>
+                </c:if>
+                <c:if test="${fn:contains(validateError, 'invalid')}">
+                    <div>
+                        <div>Please use this command:</div>
+                        <code>
+                            table_annovar.pl %s /data/ma/humandb -buildver hg19 -out %s -remove -protocol refGene,cytoBand,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,exac03,avsnp150,esp6500siv2_all,esp6500siv2_ea,esp6500siv2_aa,gnomad_exome,dbnsfp35a,gnomad_genome,clinvar_20180603,cosmic70,icgc21,intervar_20180118 -operation g,r,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f  -arg '-hgvs',,,,,,,,,,,,,,,,,,, -nastring . -polish –vcfinput
+                        </code>
+                        <br>
+                        <a href="<%=request.getContextPath()%>/static/Precision Medicine Matching System.pptx">Precision Medicine Matching System.pptx</a>
+                    </div>
+                </c:if>
             </div>
         </main>
     </div>

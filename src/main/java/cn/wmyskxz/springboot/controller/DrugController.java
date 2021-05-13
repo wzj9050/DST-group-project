@@ -36,24 +36,25 @@ public class DrugController {
     public ServletContext getServletContext() {
         return servletContext;
     }
-//    private DrugDao drugDao = new DrugDao();
+    private DrugDao drugDao = new DrugDao();
     @RequestMapping("/drugs")
-    public String drugs(@NotNull Model m) {
+    public String Drugs(@NotNull Model m) {
 
-        String drugsContent = null;
-        try {
-            drugsContent = Files.readString(Path.of(getServletContext().getRealPath("/WEB-INF/drugs.data")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Gson gson = new Gson();
-        Map drugs = gson.fromJson(drugsContent, Map.class);
-        List<Map> drugList = (List<Map>) drugs.get("data");
-        m.addAttribute("drugs", drugList);
+//        以下注释为不完整demo的springboot兼容版本，勿删
+//        String drugsContent = null;
+//        try {
+//            drugsContent = Files.readString(Path.of(getServletContext().getRealPath("/WEB-INF/drugs.data")));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Gson gson = new Gson();
+//        Map drugs = gson.fromJson(drugsContent, Map.class);
+//        List<Map> drugList = (List<Map>) drugs.get("data");
+//        m.addAttribute("drugs", drugList);
 
-//下面两句和上面一句等到爬虫解决就可以放回来了
-//        List<Drug> drugs = drugDao.findAll();
-//        m.addAttribute("drugs", drugs);
+
+        List<Drug> drugs = drugDao.findAll();
+        m.addAttribute("drugs", drugs);
         return "drugs";
     }
 
